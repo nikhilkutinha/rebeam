@@ -1,4 +1,4 @@
-A simple website to view images captured by the three mars rovers, Curiosity, Opportunity and Spirit.
+A simple website to view images captured by NASA's three mars rovers, Curiosity, Opportunity and Spirit.
 The site relies on [NASA's Mars API](https://data.nasa.gov/Space-Science/Mars-Rover-Photos-API/929k-jizu).
 
 ## Libraries Used
