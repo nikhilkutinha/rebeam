@@ -29,6 +29,7 @@
       <select
         :disabled="!cameras.length"
         v-model="filters.camera"
+        @change="onCamera"
         autocomplete="off"
         required
         class="bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -52,7 +53,17 @@
         placeholder="Date"
       /> -->
 
+      <input
+        v-if="isMobile"
+        type="date"
+        :min="minDate"
+        :max="maxDate"
+        v-model="filters.earth_date"
+        class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+      />
+
       <base-datepicker
+        v-else
         required
         :enable="enable"
         :disabled="!enable.length"
@@ -86,16 +97,16 @@
       Your current selection did not yield results, please try re-searching.
     </div>
 
-    <image-list :loading="loading" :images="images" />
+    <image-list ref="scrollable" :loading="loading" :images="images" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import _ from "lodash";
 import ImageList from "../components/ImageList";
 import { ImageService, ManifestService } from "../services/api.service";
 import BaseDatepicker from "../components/BaseDatepicker";
+import { isMobile } from "../utils/helpers";
 
 export default {
   name: "Home",
@@ -134,6 +145,11 @@ export default {
   },
 
   computed: {
+    isMobile() {
+      if (isMobile.any()) return true;
+      return false;
+    },
+
     isEmpty() {
       return !this.loading && !this.images.length;
     },
@@ -170,16 +186,11 @@ export default {
         return this.manifest.photos.map(value => value.earth_date);
       }
 
-      // console.log(this.filters.camera);
-      // return this.manifest.photos.map(value => value.earth_date);
-
       return this.manifest.photos
         .filter(value => {
           return value.cameras.includes(this.filters.camera);
         })
         .map(value => value.earth_date);
-
-      // return _.uniq(dates);
     }
   },
 
@@ -194,6 +205,10 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+
+    onCamera() {
+      this.filters.earth_date = "";
     },
 
     onRover() {
