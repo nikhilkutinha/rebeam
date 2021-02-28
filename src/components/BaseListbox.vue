@@ -1,5 +1,8 @@
 <template>
-  <Listbox v-slot="{ open }" v-model="value">
+  <Listbox
+    v-slot="{ open }"
+    v-model="value"
+  >
     <div class="relative">
       <ListboxButton
         class="w-full text-gray-300 py-2 px-3 shadow-inner border border-gray-700 bg-gray-800 rounded text-left focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"

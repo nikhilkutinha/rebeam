@@ -3,7 +3,10 @@
     class="bg-gray-800 rounded-sm bg-white shadow-md transform hover:-translate-y-1 transition-transform duration-100 ease-in"
   >
     <figure class="aspect-w-1 aspect-h-1 overflow-hidden">
-      <img :src="image.img_src" class="object-cover transform scale-125" />
+      <img
+        :src="image.img_src"
+        class="object-cover transform scale-125"
+      >
     </figure>
     <div class="py-4 px-5 text-gray-200 space-y-2">
       <p class="flex items-center justify-between">

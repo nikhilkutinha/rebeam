@@ -1,5 +1,8 @@
 <template>
-  <flat-pickr v-model="value" :config="config"></flat-pickr>
+  <flat-pickr
+    v-model="value"
+    :config="config"
+  />
 </template>
 
 <script>
@@ -8,10 +11,8 @@ import "flatpickr/dist/flatpickr.css";
 import _ from "lodash";
 
 export default {
-  data() {
-    return {
-      date: null
-    };
+  components: {
+    flatPickr
   },
   props: {
     modelValue: {
@@ -21,7 +22,7 @@ export default {
 
     enable: {
       type: Array,
-      refired: false
+      default: undefined
     },
 
     options: {
@@ -39,11 +40,13 @@ export default {
       default: ""
     }
   },
-  components: {
-    flatPickr
-  },
 
   emits: ["update:modelValue"],
+  data() {
+    return {
+      date: null
+    };
+  },
 
   computed: {
     config() {

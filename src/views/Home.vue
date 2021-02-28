@@ -5,12 +5,19 @@
       @submit.prevent="loadAsyncData"
     >
       <select
-        required
         v-model="rover"
+        required
         class="bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         @change="onRover"
       >
-        <option value="" disabled selected hidden>Choose a rover</option>
+        <option
+          value=""
+          disabled
+          selected
+          hidden
+        >
+          Choose a rover
+        </option>
 
         <option value="perseverance">
           Perseverance
@@ -27,14 +34,21 @@
       </select>
 
       <select
-        :disabled="!cameras.length"
         v-model="filters.camera"
-        @change="onCamera"
+        :disabled="!cameras.length"
         autocomplete="off"
         required
         class="bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        @change="onCamera"
       >
-        <option value="" disabled selected hidden>Choose a camera</option>
+        <option
+          value=""
+          disabled
+          selected
+          hidden
+        >
+          Choose a camera
+        </option>
 
         <option
           v-for="(value, key) in cameras"
@@ -55,22 +69,22 @@
 
       <input
         v-if="isMobile"
+        v-model="filters.earth_date"
         type="date"
         :min="minDate"
         :max="maxDate"
-        v-model="filters.earth_date"
         class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-      />
+      >
 
       <base-datepicker
         v-else
+        v-model="filters.earth_date"
         required
         :enable="enable"
         :disabled="!enable.length"
         :min-date="minDate"
         :max-date="maxDate"
         placeholder="Choose a date"
-        v-model="filters.earth_date"
         class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
       />
 
@@ -93,11 +107,18 @@
       </button>
     </form>
 
-    <div v-if="isEmpty" class="bg-yellow-300 text-yellow-800 py-5 px-6 rounded">
+    <div
+      v-if="isEmpty"
+      class="bg-yellow-300 text-yellow-800 py-5 px-6 rounded"
+    >
       Your current selection did not yield results, please try re-searching.
     </div>
 
-    <image-list ref="scrollable" :loading="loading" :images="images" />
+    <image-list
+      ref="scrollable"
+      :loading="loading"
+      :images="images"
+    />
   </div>
 </template>
 
@@ -131,17 +152,6 @@ export default {
       },
       rover: ""
     };
-  },
-
-  mounted() {
-    ImageService.latest()
-      .then(({ data }) => {
-        this.loading = true;
-        this.images = data.latest_photos.reverse();
-      })
-      .finally(() => {
-        this.loading = false;
-      });
   },
 
   computed: {
@@ -192,6 +202,17 @@ export default {
         })
         .map(value => value.earth_date);
     }
+  },
+
+  mounted() {
+    ImageService.latest()
+      .then(({ data }) => {
+        this.loading = true;
+        this.images = data.latest_photos.reverse();
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   },
 
   methods: {
