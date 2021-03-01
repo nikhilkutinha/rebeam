@@ -59,21 +59,18 @@
         </option>
       </select>
 
-      <!-- <input
-        :disabled="!manifest"
-        v-model="filters.earth_date"
-        type="date"
-        class="bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        placeholder="Date"
-      /> -->
-
       <input
         v-if="isMobile"
         v-model="filters.earth_date"
-        type="date"
+        type="text"
         :min="minDate"
         :max="maxDate"
+        required
+        :disabled="!enable.length"
+        :enable="enable"
+        placeholder="Choose a date"
         class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        @focus="({ target }) => (target.type = 'date')"
       >
 
       <base-datepicker
@@ -87,17 +84,6 @@
         placeholder="Choose a date"
         class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
       />
-
-      <!-- <input
-        id="email-address"
-        name="email"
-        type="email"
-        autocomplete="email"
-        required
-        disabled
-        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-        placeholder="Email address"
-      /> -->
 
       <button
         class="w-full py-2.5 px-6 bg-indigo-500 text-white rounded lg:w-auto"
@@ -116,6 +102,7 @@
 
     <image-list
       ref="scrollable"
+      class="pb-12"
       :loading="loading"
       :images="images"
     />

@@ -1,5 +1,10 @@
-import { createApp } from "vue"
-import App from "./App.vue"
-import router from "./router"
+import "./plugins/jquery";
 
-createApp(App).use(router).mount("#app")
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import "@fancyapps/fancybox/dist/jquery.fancybox.css";
+
+createApp(App)
+  .use(router)
+  .mount("#app");

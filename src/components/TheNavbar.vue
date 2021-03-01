@@ -9,6 +9,7 @@
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
+            @click="toggleMobileMenu"
           >
             <span class="sr-only">Open main menu</span>
             <!-- Icon when menu is closed. -->
@@ -18,6 +19,24 @@
             Menu open: "hidden", Menu closed: "block"
           -->
             <svg
+              v-if="isMobileMenuActive"
+              class="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+
+            <svg
+              v-else
               class="block h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -32,55 +51,43 @@
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
-            <!-- Icon when menu is open. -->
-            <!--
-            Heroicon name: outline/x
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
-            <svg
-              class="hidden h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
           </button>
         </div>
         <div
-          class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
+          class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between"
         >
           <div class="flex-shrink-0 flex items-center">
-            <!-- <img
-              class="block lg:hidden h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-              alt="Workflow"
-            > -->
             <img
-              class="h-10 w-auto"
+              class="block sm:hidden h-12 w-auto"
               src="@/assets/logo.png"
               alt="Workflow"
             >
+
+            <div class="hidden sm:flex items-center">
+              <img
+                class="h-12 w-auto"
+                src="@/assets/logo.png"
+                alt="Workflow"
+              >
+              <span
+                class="text-white text-2xl font-semibold ml-2.5"
+              >rebeam</span>
+            </div>
           </div>
-          <div class="hidden  items-center sm:flex sm:ml-6">
+          <div class="hidden  items-center sm:flex  sm:ml-6">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a
-                href="#"
+              <router-link
+                :to="{ name: 'Home' }"
                 class="text-white px-3 py-2 rounded-md text-sm font-medium"
-              >Gallery</a>
+              >
+                Gallery
+              </router-link>
               <a
-                href="#"
+                target="blank"
+                href="https://github.com/nikhilkutinha/rebeam"
                 class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >Rovers</a>
+              >About</a>
             </div>
           </div>
         </div>
@@ -89,26 +96,41 @@
 
     <!-- Mobile menu, show/hide based on menu state. -->
     <div
+      v-if="isMobileMenuActive"
       id="mobile-menu"
       class="sm:hidden"
     >
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a
-          href="#"
+        <router-link
+          :to="{ name: 'Home' }"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Dashboard</a>
+        >
+          Gallery
+        </router-link>
         <a
-          href="#"
+          target="blank"
+          href="https://github.com/nikhilkutinha/rebeam"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Team</a>
+        >About</a>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-export default {}
-</script>
+export default {
+  data() {
+    return {
+      isMobileMenuActive: false
+    };
+  },
 
+  methods: {
+    toggleMobileMenu() {
+      this.isMobileMenuActive = !this.isMobileMenuActive;
+    }
+  }
+};
+</script>
 <style></style>

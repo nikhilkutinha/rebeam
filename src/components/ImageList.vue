@@ -23,6 +23,10 @@
 import ImageListItem from "./ImageListItem";
 import ImageListSkleton from "./ImageListSkleton";
 
+import "@fancyapps/fancybox";
+
+$.fancybox.defaults.buttons = ["download", "close"];
+
 export default {
   components: {
     ImageListItem,
