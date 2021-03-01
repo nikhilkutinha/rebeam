@@ -159,8 +159,6 @@ export default {
     maxDate() {
       if (!this.enable.length) return;
 
-      console.log("hello");
-
       return _.last(this.enable);
     },
 
