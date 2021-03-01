@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto px-2 sm:px-6 lg:px-8">
     <form
-      class="space-y-3 lg:flex lg:space-y-0 lg:space-x-5 py-12"
+      class="space-y-3 lg:flex lg:space-y-0 lg:space-x-5 py-6 sm:py-12"
       @submit.prevent="loadAsyncData"
     >
       <select
@@ -62,15 +62,13 @@
       <input
         v-if="isMobile"
         v-model="filters.earth_date"
-        type="text"
+        type="date"
         :min="minDate"
         :max="maxDate"
         required
         :disabled="!enable.length"
-        :enable="enable"
         placeholder="Choose a date"
         class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        @focus="({ target }) => (target.type = 'date')"
       >
 
       <base-datepicker
@@ -86,7 +84,7 @@
       />
 
       <button
-        class="w-full py-2.5 px-6 bg-indigo-500 text-white rounded lg:w-auto"
+        class="w-full py-2.5 px-6 bg-indigo-500 text-white rounded lg:w-auto focus:outline-none"
         type="submit"
       >
         Search
