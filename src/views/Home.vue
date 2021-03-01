@@ -1,94 +1,118 @@
 <template>
   <div class="container mx-auto px-2 sm:px-6 lg:px-8">
     <form
-      class="space-y-3 lg:flex lg:space-y-0 lg:space-x-5 py-6 sm:py-12"
+      class="space-y-4 lg:flex lg:space-y-0 lg:space-x-5 py-6 sm:py-12"
       @submit.prevent="loadAsyncData"
     >
-      <select
-        v-model="rover"
-        required
-        class="bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        @change="onRover"
-      >
-        <option
-          value=""
-          disabled
-          selected
-          hidden
+      <div class="w-full">
+        <label
+          for="rover"
+          class="text-gray-300 block font-bold mb-1.5"
+        >Rover</label>
+
+        <select
+          id="rover"
+          v-model="rover"
+          required
+          class="bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          @change="onRover"
         >
-          Choose a rover
-        </option>
+          <option
+            value=""
+            disabled
+            selected
+            hidden
+          >
+            Choose a rover
+          </option>
 
-        <option value="perseverance">
-          Perseverance
-        </option>
-        <option value="curiosity">
-          Curiosity
-        </option>
-        <option value="opportunity">
-          Opportunity
-        </option>
-        <option value="spirit">
-          Spirit
-        </option>
-      </select>
+          <option value="perseverance">
+            Perseverance
+          </option>
+          <option value="curiosity">
+            Curiosity
+          </option>
+          <option value="opportunity">
+            Opportunity
+          </option>
+          <option value="spirit">
+            Spirit
+          </option>
+        </select>
+      </div>
+      <div class="w-full">
+        <label
+          for="camera"
+          class="text-gray-300 block font-bold mb-1.5"
+        >Camera</label>
 
-      <select
-        v-model="filters.camera"
-        :disabled="!cameras.length"
-        autocomplete="off"
-        required
-        class="bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        @change="onCamera"
-      >
-        <option
-          value=""
-          disabled
-          selected
-          hidden
+        <select
+          id="camera"
+          v-model="filters.camera"
+          :disabled="!cameras.length"
+          autocomplete="off"
+          required
+          class="disabled:opacity-50 bg-gray-800 text-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          @change="onCamera"
         >
-          Choose a camera
-        </option>
+          <option
+            value=""
+            disabled
+            selected
+            hidden
+          >
+            Choose a camera
+          </option>
 
-        <option
-          v-for="(value, key) in cameras"
-          :key="key + ':' + value"
-          :value="value"
+          <option
+            v-for="(value, key) in cameras"
+            :key="key + ':' + value"
+            :value="value"
+          >
+            {{ value }}
+          </option>
+        </select>
+      </div>
+      <div class="w-full">
+        <label
+          for="date"
+          class="text-gray-300 block font-bold mb-1.5"
+        >Date</label>
+        <input
+          v-if="isMobile"
+          id="date"
+          v-model="filters.earth_date"
+          type="date"
+          :min="minDate"
+          :max="maxDate"
+          required
+          :disabled="!enable.length"
+          class="disabled:opacity-50  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         >
-          {{ value }}
-        </option>
-      </select>
 
-      <input
-        v-if="isMobile"
-        v-model="filters.earth_date"
-        type="date"
-        :min="minDate"
-        :max="maxDate"
-        required
-        :disabled="!enable.length"
-        placeholder="Choose a date"
-        class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-      >
+        <base-datepicker
+          v-else
+          id="date"
+          v-model="filters.earth_date"
+          autocomplete="off"
+          required
+          :enable="enable"
+          :disabled="!enable.length"
+          :min-date="minDate"
+          :max-date="maxDate"
+          placeholder="Choose a date"
+          class="disabled:opacity-50  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        />
+      </div>
 
-      <base-datepicker
-        v-else
-        v-model="filters.earth_date"
-        required
-        :enable="enable"
-        :disabled="!enable.length"
-        :min-date="minDate"
-        :max-date="maxDate"
-        placeholder="Choose a date"
-        class="disabled:opacity-75  bg-gray-800 text-gray-300 placeholder-gray-300 block w-full px-3 py-2 border border-gray-700 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-      />
-
-      <button
-        class="w-full py-2.5 px-6 bg-indigo-500 text-white rounded lg:w-auto focus:outline-none"
-        type="submit"
-      >
-        Search
-      </button>
+      <div class="flex items-end">
+        <button
+          class="w-full py-2.5 px-6 bg-indigo-500 text-white rounded lg:w-auto focus:outline-none"
+          type="submit"
+        >
+          Search
+        </button>
+      </div>
     </form>
 
     <div
@@ -100,7 +124,7 @@
 
     <image-list
       ref="scrollable"
-      class="pb-12"
+      class="pb-12 mt-3"
       :loading="loading"
       :images="images"
     />
