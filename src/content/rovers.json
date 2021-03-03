@@ -1,0 +1,46 @@
+[
+    {
+        "name": "Perseverance",
+        "id": "4",
+        "image": "perseverance.jpg",
+        "glb": "perseverance.glb",
+        "launch": "2020-07-30",
+        "landing": "2021-02-21",
+        "weight": 1025,
+        "status": "Alive",
+        "goal": "The mission of the Mars 2020 Perseverance rover focuses on surface-based studies of the Martian environment, seeking preserved signs of biosignatures in rock samples that formed in ancient Martian environments with conditions that might have been favorable to microbial life."
+    },
+    {
+        "name": "Curiosity",
+        "id": "1",
+        "image": "curiosity.jpg",
+        "glb": "curiosity.glb",
+        "launch": "2011-11-26",
+        "landing": "2012-08-06",
+        "weight": 899,
+        "status": "Alive",
+        "goal": "As established by the Mars Exploration Program, the main scientific goals of the MSL mission are to help determine whether Mars could ever have supported life, as well as determining the role of water, and to study the climate and geology of Mars. The mission results will also help prepare for human exploration. "
+    },
+    {
+        "name": "Spirit",
+        "id": "3",
+        "image": "mer.jpg",
+        "glb": "mer.glb",
+        "launch": "2003-06-10",
+        "landing": "2004-01-04",
+        "weight": 899,
+        "status": "Dead",
+        "goal": "One of two rovers launched in 2003 to explore Mars and search for signs of past life, Spirit far outlasted her planned 90-day mission. Among her myriad discoveries, Spirit found evidence that Mars was once much wetter than it is today and helped scientists better understand the Martian wind. \n\nIn May 2009, the rover became embedded in soft soil at a site called Troy with only five working wheels to aid in the rescue effort. After months of testing and carefully planned maneuvers, NASA ended efforts to free the rover and eventually ended the mission on May 25, 2011."
+    },
+    {
+        "name": "Opportunity",
+        "id": "2",
+        "image": "mer.jpg",
+        "glb": "mer.glb",
+        "launch": "2003-07-08",
+        "landing": "2004-01-25",
+        "weight": 899,
+        "status": "Dead",
+        "goal": "Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of past life.\n\nDue to the planetary 2018 dust storm on Mars, Opportunity ceased communications on June 10 and entered hibernation on June 12, 2018. It was hoped it would reboot once the weather cleared, but it did not, suggesting either a catastrophic failure or that a layer of dust had covered its solar panels."
+    }
+]
