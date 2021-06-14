@@ -20,7 +20,7 @@
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",
-    "postcss": "^7.0.35",
+    "postcss": "^8.2.10",
     "sass-loader": "^10.1.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^3.0.6",
